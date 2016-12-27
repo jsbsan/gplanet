@@ -1,0 +1,38 @@
+' Gambas class file
+
+Public celda As New Integer[40, 24]
+
+Public Function casillalibre() As Point
+
+  Dim x, y As Integer
+  Dim casilla As New Point
+
+  While True
+    x = Int(Rnd(3, 38))
+    y = Int(Rnd(3, 22))
+    If celda[x, y] = 0 And alrededor(x, y) = True Then
+      celda[x, y] = 1
+      casilla.x = x
+      casilla.y = y
+      Return casilla
+    Endif
+
+  Wend
+
+End
+
+Private Function alrededor(vx As Integer, vy As Integer) As Boolean
+
+  Dim a As Integer
+
+  For a = 0 To 4
+    If celda[vx - 2 + a, vy - 1] <> 0 Then Return False
+    If celda[vx - 2 + a, vy + 1] <> 0 Then Return False
+  Next
+  If celda[vx - 2, vy] <> 0 Then Return False
+  If celda[vx - 1, vy] <> 0 Then Return False
+  If celda[vx + 1, vy] <> 0 Then Return False
+  If celda[vx + 2, vy] <> 0 Then Return False
+  Return True
+
+End

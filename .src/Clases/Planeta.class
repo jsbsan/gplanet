@@ -1,0 +1,162 @@
+' Gambas class file
+
+Property colorplaneta As Integer
+Private hcolorplaneta As Integer
+
+Property Propietario As String 'de quien es el planteta Jugador IA o N/A (sin propietario)
+Property Produccion As Integer ' produccion de naves: 5 a 15
+Private hProduccion As Integer
+
+Property Posicion As Point 'tiene las coordenadas del planeta
+
+Private hposicion As New Point
+
+Private hPropietario As String = "N/A"
+
+Public radio As Integer = 12
+
+Public naves As Integer
+
+Public nombre As String 'nombre del planeta
+
+Private imagenplaneta As String 'ruta del fichero de la imagen del planeta
+Private ImageImagenPlaneta As Image
+
+Private Function Propietario_Read() As String
+
+  Return hPropietario
+
+End
+
+Private Sub Propietario_Write(Value As String)
+
+  hPropietario = Value
+
+End
+
+Private Function Produccion_Read() As Integer
+
+  Return hProduccion
+
+End
+
+Private Sub Produccion_Write(Value As Integer)
+
+  hProduccion = Value
+
+End
+
+Private Function Posicion_Read() As Point
+
+  Return hposicion
+
+End
+
+Private Sub Posicion_Write(Value As Point)
+
+  hposicion = value
+
+End
+
+Public Sub _new(propiedad As String, tablerotmp As Tablero)
+
+  Dim p As Point
+
+  hPropietario = propiedad
+  hProduccion = Int(Rnd(5, 16))
+
+  p = tablerotmp.CasillaLibre()
+
+  hPosicion.X = p.x * 25
+
+  hPosicion.y = p.y * 25
+
+  Me.colorplaneta = Choose(Int(Rnd(1, 6)), Color.orange, Color.Green, Color.red, Color.Magenta, Color.DarkCyan)
+  imagenplaneta = Choose(Int(Rnd(1, 6)), "1r.png", "2r.png", "3r.png", "5r.png", "6r.png")
+  ImageImagenPlaneta = Image.Load("planetas/" & imagenplaneta)
+
+End
+
+Public Function distancia(x As Integer, y As Integer) As Integer
+
+  Return EcuacionesRecta.distanciaEntreDosPuntos(x, y, Me.Posicion.x, Me.Posicion.y)
+
+End
+
+Public Sub dibuja()
+  '
+  ' 'dibujo planeta
+  ' Paint.Brush = Paint.Color(Color.RGB(0, 0, 0))
+  ' Paint.Ellipse(Me.Posicion.x, Me.Posicion.y, radio * 2, radio * 2)
+  ' Paint.Stroke
+  ' Paint.Brush = Paint.Color(Me.colorplaneta)
+  ' Paint.Ellipse(Me.Posicion.x, Me.Posicion.y, radio * 2, radio * 2)
+  ' Paint.Fill(True)
+  ' Paint.Stroke
+
+  'dibujo planeta
+
+  Paint.DrawImage(ImageImagenPlaneta, Me.Posicion.x, Me.Posicion.y)
+
+  'dibujo datos del planeta
+  Paint.MoveTo(Me.Posicion.x - 10, Me.Posicion.y + 30)
+  Paint.Brush = Paint.Color(Color.RGB(0, 0, 0))
+
+  Paint.Font.Name = "Nimbus Mono L"
+  Paint.Font.Size = 8
+  Paint.Font.Bold = True
+
+  Draw.RichText("Nombre: " & Me.Nombre, Me.Posicion.x - 10, Me.Posicion.y + 30)
+  Draw.RichText("Prod: " & Me.Produccion, Me.Posicion.x - 10, Me.Posicion.y + 40)
+  Draw.RichText("Naves: " & naves, Me.Posicion.x - 10, Me.Posicion.y + 50)
+  Paint.Stroke
+
+  'dibujo signo del propietario del planeta
+  Paint.DrawImage(iconoPropietario(), Me.Posicion.x - 15, Me.Posicion.y - 15)
+  Paint.Stroke
+
+End
+
+Private Function colorplaneta_Read() As Integer
+
+  Return hcolorplaneta
+
+End
+
+Private Sub colorplaneta_Write(Value As Integer)
+
+  hcolorplaneta = value
+
+End
+
+Public Function igual(p As Planeta) As Boolean
+
+  If p.Posicion.x = Me.Posicion.x And p.Posicion.y = Me.Posicion.y Then
+    Return True
+  Else
+    Return False
+  Endif
+
+End
+
+Public Function escribe() As String
+  'describe el nombre del planeta y la posicion en el tablero
+
+  Dim cadena As String
+
+  cadena = Me.nombre
+  cadena &= " [" & Str(Me.Posicion.x / 25) & " , " & Str(Me.Posicion.y / 25) & "] "
+
+  Return cadena
+
+End
+
+Private Function iconoPropietario() As Image
+
+  If hPropietario = "N/A" Then
+    Return Image.Load("galactic empire15x15.png")
+  Else
+    Return Image.Load("new republic15x15.png")
+  Endif
+
+End

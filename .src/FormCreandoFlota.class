@@ -1,0 +1,48 @@
+' Gambas class file
+
+Public numero As Integer[]
+Public valormaximo As Integer
+
+Public Sub form_Show()
+
+  SpinBoxNaves.MinValue = 1
+  SpinBoxNaves.MaxValue = valormaximo
+
+End
+
+Public Sub ButtonCancelar_Click()
+
+  numero.Clear()
+  numero.Add(0)
+
+  Me.Close
+
+End
+
+Public Sub ButtonEnvioNumero_Click()
+
+  numero.Add(SpinBoxNaves.Value)
+  Me.close
+
+End
+
+Public Sub ButtonMitad_Click()
+
+  numero.Add(Int(valormaximo / 2))
+  Me.Close
+
+End
+
+Public Sub ButtonEnviarTodas_Click()
+
+  numero.Add(valormaximo)
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  Me.x = 500 / 2
+  Me.y = Desktop.h / 2
+
+End

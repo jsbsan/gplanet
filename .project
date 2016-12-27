@@ -1,0 +1,16 @@
+# Gambas Project File 3.0
+# Compiled with Gambas 3.9.1
+Title=gplanet
+Startup=FMain
+Icon=cascoimperial.png
+Version=0.0.1
+Component=gb.image
+Component=gb.gui
+Component=gb.form
+Component=gb.settings
+Description="Extends the power of the new republic by the weakened empire .... wins planets but while ... wait for the counterattack of the empire.\nExtiende el poder de la nueva república por el debilitado imperio.... gana planetas pero mientas...... esperas al contrataque del imperio."
+Authors="Julio Sanchez Berro (jsbsan)"
+TabSize=2
+Translate=1
+Language=en_US
+Packager=1

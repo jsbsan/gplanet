@@ -1,0 +1,136 @@
+' Gambas class file
+
+Event llegada(p As Planeta, f As Flota)
+
+Public IconoNave As Image = Image.Load("naves/republica/XWing-icon.png")
+Public IconoNaveFlota As Image = Image.Load("naves/republica/XWing-icon-flota.png")
+Public IconoNaveFlotaGrande As Image = Image.Load("naves/republica/corveta.png")
+
+Property Propietario As String
+Private hpropietario As String
+
+Public colorJugador As Integer
+
+Property origen As Planeta
+Private horigen As Planeta
+
+Property destino As Planeta
+Private hdestino As Planeta
+
+Public naves As Integer  'numero de naves que la forman
+
+Public velocidad As Integer = 10 'Velocidad de la flota
+
+Private hdistancia As Single
+Private hincrementoX As Single
+Private hincrementoY As Single
+
+Private posX As Integer
+Private posY As Integer
+
+Private paso As Integer 'numero de pasos para llegar al planeta segun mi velocidad
+Private hcontador As Integer = 0 'numero de pasos actualmente
+
+Private Function origen_Read() As Planeta
+
+  Return horigen
+
+End
+
+Private Sub origen_Write(Value As Planeta)
+
+  horigen = value
+
+End
+
+Private Function destino_Read() As Planeta
+
+  Return hdestino
+
+End
+
+Private Sub destino_Write(Value As Planeta)
+
+  Dim incre As Integer
+
+  hdestino = value
+  'calculo distancia...
+  hdistancia = EcuacionesRecta.distanciaEntreDosPuntos(horigen.Posicion.x + horigen.radio, horigen.Posicion.y + horigen.radio, hdestino.Posicion.x + hdestino.radio, hdestino.Posicion.y + hdestino.radio)
+  'calculo incremento
+  incre = hdistancia / Me.velocidad
+  hincrementoX = (hdestino.Posicion.x - horigen.Posicion.X) / incre
+  hincrementoY = (hdestino.Posicion.y - horigen.Posicion.y) / incre
+  paso = incre
+  'posiciono flota
+  posX = horigen.Posicion.x + 12
+
+  posY = horigen.Posicion.y + 12
+
+End
+
+Public activa As Boolean = False
+
+Public Sub dibuja()
+
+  If activa = True Then
+    ' Print "dibujando flota", Me
+    'dibuja trazado ruta
+
+    Paint.LineWidth = 1
+    Paint.LineCap = Paint.LineCapButt
+    Paint.Dash = [3.0, 1.0]
+    Paint.DashOffset = -5
+
+    Paint.Brush = Paint.Color(Color.red)
+    Paint.MoveTo(horigen.Posicion.x + horigen.radio, horigen.Posicion.y + horigen.radio)
+    Paint.LineTo(hdestino.Posicion.x + hdestino.radio, hdestino.Posicion.y + hdestino.radio)
+    Paint.stroke
+
+    '  Print "dibujo icono de flota..."
+    Select Case Me.naves
+      Case 1 To 5
+        Paint.DrawImage(IconoNave, posx, posy)
+      Case 6 To 15
+        Paint.DrawImage(IconoNaveFlota, posx, posy)
+      Case Else
+        Paint.DrawImage(IconoNaveFlotaGrande, posx, posy)
+    End Select
+    Paint.Stroke
+
+    'dibujo datos de la flota
+    Paint.Font.Name = "Nimbus Mono L"
+    Paint.Font.Size = 10
+    Paint.Font.Bold = False
+    Draw.RichText(Me.naves, posX - 10, posY - 15)
+
+    Paint.Stroke
+
+  Endif
+
+End
+
+Public Sub avance()
+
+  posx += hincrementoX
+  posy += hincrementoy
+  hcontador += 1
+  If paso < hcontador Then
+    'he llegado a mi destino
+    Raise llegada(hdestino, Me)
+    activa = False
+
+  Endif
+
+End
+
+Private Function Propietario_Read() As String
+
+  Return hpropietario
+
+End
+
+Private Sub Propietario_Write(Value As String)
+
+  hpropietario = value
+
+End

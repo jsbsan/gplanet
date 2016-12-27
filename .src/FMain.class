@@ -1,0 +1,360 @@
+' Gambas class file
+
+Public ArrayPlanetas As New Planeta[]
+Public ArrayFlotas As New Flota[]
+Public flotaActual As Flota
+Public tablerojuego As New Tablero
+Public fondotmp As New Fondo
+
+Public JugadorUno As String = "Jugador 1"
+
+Public paso As Integer = 0
+
+Private Observador As Observer
+
+Private pinicial As Planeta 'planeta inicial que se hace click
+
+Private lista As String[]
+
+Public Sub Form_Open()
+
+  Dim p As Planeta
+
+  Randomize
+
+  TextAreaInformacion.text = ("Construye tu Imperio Galáctico...") & "\n" & ("Tu misión: Explora y domina el mayor número de planetas...") & finlinea()
+
+  lista = Split(File.Load("planetas.txt"), "\n")
+
+  Me.x = 100
+  creaPlanetas(lista)
+
+  'creo planeta del jugador
+  p = New Planeta("Jugador 1", tablerojuego)
+  P.naves = 10
+  p.nombre = lista[0]
+  ArrayPlanetas.Add(p)
+
+  'inicio relojes
+  Timer1.Start()
+  TimerProduccion.Start()
+
+  TimerFlotasEnemigas.Start()
+
+End
+
+Public Sub form_Show()
+
+End
+
+Public Sub Form_Close()
+
+End
+
+Public Sub DrawingArea1_Draw()
+
+  Dim flotatmp As Flota
+  Dim planetTmp As Planeta
+
+  'dibujo fondo
+  fondotmp.dibujo()
+  'dibujo naves navegando
+  For Each flotatmp In ArrayFlotas
+    flotatmp.dibuja()
+  Next
+
+  'dibujo planetas y datos
+  For Each planetTmp In ArrayPlanetas
+    planetTmp.dibuja()
+  Next
+
+End
+
+Public Sub creaPlanetas(l As String[])
+
+  Dim a As Integer
+  Dim p As Planeta
+
+  Dim n As String
+
+  For a = 1 To 10
+    p = New Planeta("N/A", tablerojuego)
+
+    n = l.Extract(Int(Rnd(1, l.Count)))[0]
+    p.nombre = n
+    p.naves = Int(Rnd(1, 6))
+    ArrayPlanetas.Add(p)
+  Next
+  Debug "lista de planetas creados"
+
+End
+
+Public Function planetaCercano(x As Integer, y As Integer) As Planeta
+
+  Dim ptmp As Planeta
+  Dim distanciaMinima As Integer = 1000000
+  Dim disttmp As Integer
+  Dim pCercano As Planeta
+
+  For Each ptmp In ArrayPlanetas
+    disttmp = ptmp.distancia(x, y)
+    If distanciaMinima > ptmp.distancia(x, y) Then
+      distanciaMinima = disttmp
+      pCercano = ptmp
+    Endif
+  Next
+
+  Return pCercano
+
+End
+
+Public Sub DrawingArea1_MouseDown()
+
+  Dim p As Planeta
+  'hago clip....
+
+  ' Print "raton esta:"; Mouse.x, Mouse.y
+
+  p = planetaCercano(Mouse.x, Mouse.y)
+
+  '  Print p.Produccion, p.Propietario
+
+  If p.Propietario = JugadorUno Then
+    seleccion(p)
+  Else
+
+    If paso = 1 Then
+      flotaActual.destino = p
+      flotaActual.activa = True
+      ArrayFlotas.Add(flotaActual)
+      paso = 0
+      pinicial.naves -= flotaActual.naves
+      TextAreaInformacion.text &= ("Flota enviada a la conquista del planeta enemigo...") & p.escribe()
+      TextAreaInformacion.text &= finlinea()
+      DrawingArea1.Refresh()
+    Else
+      'escribo datos del planeta
+      TextAreaInformacion.text &= ("Nombre:") & " " & p.nombre & "\t"
+      TextAreaInformacion.text &= ("Produccion:") & " " & p.Produccion & "\t"
+      TextAreaInformacion.text &= ("Naves:") & " " & p.Naves
+      TextAreaInformacion.text &= finlinea()
+    Endif
+  Endif
+
+End
+
+Public Sub seleccion(p As Planeta)
+
+  Dim res As Integer
+  Dim v As Integer
+  Dim Arraynumero As New Integer[]
+
+  If paso = 0 Then
+    'seleccion primera
+    If p.naves = 0 Then
+
+      Message.Info(("No hay naves para enviar a ningún lado"))
+      Return
+    Endif
+
+    If Int(p.naves / 2) = 0 Then
+      Message.Info(("No hay naves bastantes para enviar a ningún lado"))
+
+      Return
+    Endif
+
+    FormCreandoFlota.numero = Arraynumero
+    FormCreandoFlota.valormaximo = p.naves
+    FormCreandoFlota.Showmodal()
+    res = Arraynumero[0]
+
+    If res = -1 Or res = 0 Then Return
+
+    TextAreaInformacion.text &= ("Elija planeta de destino...")
+    TextAreaInformacion.text &= finlinea()
+
+    flotaActual = New Flota
+    flotaActual.Propietario = JugadorUno
+    Object.Attach(flotaActual, Me, "obs") 'porque lo estamos usando den tro de un formaulario
+
+    flotaActual.origen = p
+    flotaActual.naves = res
+    flotaActual.colorJugador = p.colorplaneta
+    pinicial = p
+    paso = 1
+  Else
+
+    If p.igual(pinicial) Then
+      Message.Info("has hecho click en el mismo planeta")
+      paso = 0
+      flotaActual = Null
+
+      Return
+    Endif
+
+    'enviar naves a un planeta amigo..
+
+    flotaActual.destino = p
+    flotaActual.activa = True
+    ArrayFlotas.Add(flotaActual)
+    paso = 0
+    pinicial.naves -= flotaActual.naves
+    TextAreaInformacion.text &= ("Flota enviada al planeta amigo") & " " & p.escribe()
+    TextAreaInformacion.text &= finlinea()
+
+  Endif
+
+End
+
+Public Sub Timer1_Timer()
+
+  Dim flotatmp As Flota
+  'hace que avancen las flotas
+  For Each flotatmp In ArrayFlotas
+    flotatmp.avance()
+  Next
+
+  DrawingArea1.Refresh()
+
+End
+
+Public Sub obs_llegada(p As Planeta, f As Flota)
+  'hago la cuenta del planeta...
+
+  ' Print "llegada"
+
+  If p.Propietario = f.Propietario Then
+    'las flotas se suman
+    p.naves += f.naves
+
+    '-----------------------------------------------
+    'texto para identificar flota
+    If f.Propietario = "N/A" Then
+      TextAreaInformacion.text &= ("El imperio reune sus fuerzas..")
+    Endif
+    '-----------------------------------------------
+
+    TextAreaInformacion.text &= ("Llegada de la flota al planeta") & " " & p.escribe() & ("... reuniendo naves para el próximo ataque")
+    TextAreaInformacion.text &= finlinea()
+
+  Else
+    'es un planeta enemigo:
+    p.naves -= f.naves
+
+    '-----------------------------------------------
+    'texto para identificar flota
+    If f.Propietario = "N/A" Then
+      TextAreaInformacion.text &= ("Imperio: ")
+    Else
+      TextAreaInformacion.text &= ("Alianza Rebelde: ")
+    Endif
+    '-----------------------------------------------
+
+    If p.naves < 0 Then
+      'cambia de dueño el planeta
+      p.naves = Abs(p.naves)
+      p.Propietario = f.Propietario
+      TextAreaInformacion.text &= ("Victoria!!!!.. planeta") & " " & p.escribe() & ("conquistado.")
+      TextAreaInformacion.text &= finlinea()
+
+    Else
+      TextAreaInformacion.text &= ("Derrota!!!!.. el planeta") & " " & p.escribe() & ("ha resistido tu ataque.")
+      TextAreaInformacion.text &= finlinea()
+    Endif
+
+  Endif
+
+  'borro la flota del array
+  ArrayFlotas.Delete(ArrayFlotas.Find(f))
+  f = Null
+
+End
+
+Public Sub TimerProduccion_Timer()
+
+  Dim ptmp As Planeta
+  'hace que todos los planetas fabriquen naves!!!
+  For Each ptmp In ArrayPlanetas
+    ptmp.naves += ptmp.Produccion
+  Next
+  TextAreaInformacion.text &= ("Fin de turno de Producción") & finlinea()
+  DrawingArea1.Refresh()
+
+End
+
+Private Function finlinea() As String
+
+  TextAreaInformacion.Pos = TextAreaInformacion.Length
+  Return "\n"
+
+End
+
+Public Sub TimerFlotasEnemigas_Timer()
+
+  Dim flotatmp As Flota
+  Dim flotaImperialTmp As Flota[]
+  'agrega flotas imperiales al tablero
+
+  flotaImperialTmp = IA.creaflota(ArrayPlanetas)
+
+  If IsNull(flotaImperialTmp) Then
+    'comprobar condiciones del final de juego
+    condicionesFinalJuego()
+    Return
+  Endif
+
+  For Each flotatmp In flotaImperialTmp
+
+    Object.Attach(flotatmp, Me, "obs")
+
+  Next
+
+  ArrayFlotas.insert(flotaImperialTmp)
+
+End
+
+'Condiciones del final de juego...
+Public Sub condicionesFinalJuego()
+
+  Dim planetaTmp As Planeta
+  Dim flotatmp As Flota
+
+  Dim ContadorImperialPlanetas As Integer
+  Dim ContadorImperialNavesEnPlanetas As Integer
+  Dim ContadorImperialNavesEnFlotas As Integer
+
+  Dim ContadorJugadorPlanetas As Integer
+  Dim ContadorJugadorNavesEnPlanetas As Integer
+  Dim ContadorJugadorNavesEnFlotas As Integer
+
+  For Each planetaTmp In ArrayPlanetas
+    If planetaTmp.Propietario = "N/A" Then
+      ContadorImperialPlanetas += 1
+      ContadorImperialNavesEnPlanetas += planetaTmp.naves
+    Else
+      ContadorJugadorPlanetas += 1
+      ContadorJugadorNavesEnPlanetas += planetaTmp.naves
+    Endif
+  Next
+
+  For Each flotatmp In ArrayFlotas
+    If flotatmp.Propietario = "N/A" Then
+
+      ContadorImperialNavesEnFlotas += flotatmp.naves
+    Else
+
+      ContadorJugadorNavesEnFlotas += flotatmp.naves
+    Endif
+
+  Next
+
+  FormInforme.RebeldesNaves = ContadorJugadorNavesEnFlotas + ContadorJugadorNavesEnPlanetas
+  FormInforme.RebeldesPlanetas = ContadorJugadorPlanetas
+  FormInforme.ImperioNaves = ContadorImperialNavesEnFlotas + ContadorImperialNavesEnPlanetas
+  FormInforme.ImperioPlanetas = ContadorImperialPlanetas
+
+  FormInforme.Showmodal()
+
+  Me.Close()
+
+End

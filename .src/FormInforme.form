@@ -1,0 +1,66 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,83,64)
+  Text = ("Informe de la Partida")
+  Icon = Picture["cascoimperial.png"]
+  { PictureBox1 PictureBox
+    MoveScaled(19,6,14,15)
+    Picture = Picture["new republic.png"]
+  }
+  { PictureBox2 PictureBox
+    MoveScaled(52,6,15,15)
+    Picture = Picture["galactic empire.png"]
+  }
+  { PictureBox3 PictureBox
+    MoveScaled(72,20,7,7)
+    Picture = Picture["planetas/1r.png"]
+    Stretch = True
+  }
+  { PictureBox4 PictureBox
+    MoveScaled(6,22,7,7)
+    Picture = Picture["planetas/6r.png"]
+    Stretch = True
+  }
+  { Label1 Label
+    MoveScaled(36,7,10,8)
+    Font = Font["+8"]
+    Text = ("vs")
+    Alignment = Align.Center
+  }
+  { PictureBox6 PictureBox
+    MoveScaled(1,33,16,13)
+    Picture = Picture["naves/republica/corveta.png"]
+  }
+  { PictureBox5 PictureBox
+    MoveScaled(66,32,18,8)
+    Picture = Picture["naves/imperio/flotaimperial.png"]
+    Stretch = True
+  }
+  { TextLabelMensaje TextLabel
+    MoveScaled(5,50,72,11)
+    Font = Font["+5"]
+    Alignment = Align.Center
+    Border = Border.Raised
+  }
+  { LabelPlanetasRepublica Label
+    MoveScaled(19,22,11,8)
+    Font = Font["+3"]
+    Alignment = Align.Center
+  }
+  { LabelnavesRepublica Label
+    MoveScaled(19,35,11,8)
+    Font = Font["+3"]
+    Alignment = Align.Center
+  }
+  { LabelPlanetasImperio Label
+    MoveScaled(52,22,11,8)
+    Font = Font["+3"]
+    Alignment = Align.Center
+  }
+  { LabelNavesImperio Label
+    MoveScaled(52,35,11,8)
+    Font = Font["+3"]
+    Alignment = Align.Center
+  }
+}

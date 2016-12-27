@@ -1,0 +1,106 @@
+' Gambas module file
+
+'
+' gplanet
+' Extends the power of the new republic by the weakened empire .... wins planets but while ... wait for the counterattack of the empire.
+'
+' Copyright (C) Julio Sanchez Berro (jsbsan)
+'
+' This program is free software; you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation; either version 2 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program; if not, write to the Free Software
+' Foundation, Inc., 51 Franklin St, Fifth Floor,
+' Boston, MA  02110-1301  USA
+'
+'IA: Basada en una Máquina de estados
+
+Public Function creaflota(ArrayP As Planeta[]) As Flota[] 'Agreva varias flotas al tablero, segun las condiciones del sistema planetario
+
+  Dim ArrayFlotaImperial As New Flota[]
+  Dim FlotaImperial As New Flota
+
+  Dim planetaTmp As Planeta
+  Dim a As Integer
+
+  Dim planetaElegido As Planeta 'planeta del imperio
+  Dim planetaEnemigo As Planeta 'planeta de los de la republica
+
+  Debug "Creando flota imperial"
+
+  'creo dos flotas que saldran del planeta con más numero de naves
+  For a = 0 To 1
+
+    FlotaImperial = New Flota
+    'cambio imagenes de flota
+    FlotaImperial.IconoNave = Image.Load("naves/imperio/inter.png")
+    FlotaImperial.IconoNaveFlota = Image.Load("naves/imperio/interflota.png")
+    FlotaImperial.IconoNaveFlotaGrande = Image.Load("naves/imperio/flotaimperial.png")
+
+    'buscar planeta del imperio (propietario: N/A)
+
+    For Each planetaTmp In ArrayP
+      If planetaTmp.Propietario = "N/A" Then
+        planetaElegido = planetaTmp
+        Break
+      Endif
+    Next
+
+    If IsNull(planetaElegido) Then
+      'no hay planetas del imperio
+      'ha perdido el imperio... informar
+      Return Null
+
+    Endif
+
+    'buscar el planeta del imperio que tenga más naves
+    For Each planetaTmp In ArrayP
+      If planetaTmp.Propietario = "N/A" And planetaTmp.naves > planetaElegido.naves Then
+        planetaElegido = planetaTmp
+      Endif
+    Next
+
+    'busca planeta enemigo del imperio con un gran numero de naves
+
+    For Each planetaTmp In ArrayP
+      If planetaTmp.Propietario <> "N/A" Then
+        planetaEnemigo = planetaTmp
+        Break
+      Endif
+    Next
+
+    If IsNull(planetaEnemigo) Then
+      'no hay planetas de la rebelion
+      'ha ganado el imperio
+      Return Null
+
+    Endif
+
+    For Each planetaTmp In ArrayP
+      If planetaTmp.Propietario <> "N/A" And planetaTmp.naves > planetaEnemigo.naves Then
+        planetaEnemigo = planetaTmp
+      Endif
+    Next
+
+    'crea flota imperial
+
+    FlotaImperial.naves = Int(planetaElegido.naves / 2)
+    FlotaImperial.origen = planetaElegido
+    FlotaImperial.destino = planetaEnemigo
+    planetaElegido.naves -= FlotaImperial.naves 'quito las naves del planeta
+    FlotaImperial.activa = True
+    FlotaImperial.Propietario = "N/A"
+    ArrayFlotaImperial.Add(FlotaImperial)
+  Next
+
+  Return ArrayFlotaImperial
+
+End

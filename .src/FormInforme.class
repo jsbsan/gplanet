@@ -1,0 +1,30 @@
+' Gambas class file
+
+Public RebeldesPlanetas As Integer
+Public RebeldesNaves As Integer
+
+Public ImperioPlanetas As Integer
+Public ImperioNaves As Integer
+
+Public Sub Form_Open()
+
+  Me.x = 350
+
+  LabelNavesImperio.text = Str$(ImperioNaves)
+  LabelnavesRepublica.text = Str$(RebeldesNaves)
+
+  LabelPlanetasImperio.text = Str$(ImperioPlanetas)
+  LabelPlanetasRepublica.Text = Str$(RebeldesPlanetas)
+
+  'Condiciones de victoria de la partida
+
+  If RebeldesPlanetas > ImperioPlanetas Then
+
+    TextLabelMensaje.text = ("Victoria de los Rebeldes")
+
+  Else
+    TextLabelMensaje.text = ("Victoria del Imperio")
+
+  Endif
+
+End

@@ -1,0 +1,18 @@
+' Gambas class file
+
+' Gambas class file
+
+Public ImagenFondo As New Image
+
+Public Sub _new()
+
+  ImagenFondo = Image.Load("galaxia.png")
+
+End
+
+Public Sub dibujo()
+
+  Paint.DrawImage(ImagenFondo, 0, 0)
+  Paint.Stroke()
+
+End
