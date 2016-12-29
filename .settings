@@ -1,3 +1,7 @@
+[Bookmarks]
+Flota=[]
+MGlobales=[4]
+
 [Breakpoints]
 Count=0
 
@@ -59,17 +63,17 @@ Geometry=[429,497,224,280]
 Geometry=[1637,158,224,280]
 
 [OpenFile]
-Active=3
+Active=6
 File[1]=".src/FMain.form"
-File[2]="Referencias:57.7"
-File[3]=".src/FMain.class:0.357"
+File[2]="Referencias:0.7"
+File[3]=".src/FMain.class:102.266"
 File[4]=".src/Clases/Planeta.class:3.26"
 File[5]=".src/EcuacionesRecta.module:0.36"
-File[6]=".src/Clases/Flota.class:0.60"
-Count=22
-File[7]="planetas.txt:0.0"
+File[6]=".src/Clases/Flota.class:22.31"
+Count=27
+File[7]="planetas.txt:5.70"
 File[8]=".src/FormCreandoFlota.form"
-File[9]=".src/FormCreandoFlota.class:34.30"
+File[9]=".src/FormCreandoFlota.class:21.15"
 File[10]=".src/Clases/Tablero.class:6.30"
 File[11]="galactic empire.png"
 File[12]="new republic.png"
@@ -80,9 +84,14 @@ File[16]="naves/imperio/flotaimperial.png"
 File[17]="naves/republica/corveta2.png"
 File[18]="naves/republica/XWing-icon.png"
 File[19]="naves/republica/XWing-icon-flota.png"
-File[20]=".src/IA.module:0.91"
+File[20]=".src/IA.module:62.100"
 File[21]=".src/FormInforme.form"
 File[22]=".src/FormInforme.class:0.24"
+File[23]=".src/MGlobales.module:0.5"
+File[24]=".src/FormConfigurarJuego.form"
+File[25]="Princesa Leia.jpg"
+File[26]=".src/FormConfigurarJuego.class:0.39"
+File[27]="espada laser20x20.png"
 
 [Watches]
 Count=0

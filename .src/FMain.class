@@ -31,7 +31,7 @@ Public Sub Form_Open()
 
   'creo planeta del jugador
   p = New Planeta("Jugador 1", tablerojuego)
-  P.naves = 10
+  P.naves = MGlobales.NavesInicialesJugador
   p.nombre = lista[0]
   ArrayPlanetas.Add(p)
 
@@ -85,7 +85,7 @@ Public Sub creaPlanetas(l As String[])
     p.naves = Int(Rnd(1, 6))
     ArrayPlanetas.Add(p)
   Next
-  Debug "lista de planetas creados"
+  '  Debug "lista de planetas creados"
 
 End
 
@@ -165,6 +165,12 @@ Public Sub seleccion(p As Planeta)
 
     FormCreandoFlota.numero = Arraynumero
     FormCreandoFlota.valormaximo = p.naves
+    FormCreandoFlota.xx = Me.x + p.Posicion.X
+    FormCreandoFlota.yy = Me.y + p.Posicion.Y
+
+    FormCreandoFlota.NavesDisponibles = p.naves
+    FormCreandoFlota.nombrePlaneta = p.nombre
+
     FormCreandoFlota.Showmodal()
     res = Arraynumero[0]
 
@@ -258,7 +264,7 @@ Public Sub obs_llegada(p As Planeta, f As Flota)
       TextAreaInformacion.text &= finlinea()
 
     Else
-      TextAreaInformacion.text &= ("Derrota!!!!.. el planeta") & " " & p.escribe() & ("ha resistido tu ataque.")
+      TextAreaInformacion.text &= ("Derrota!!!!.. el planeta") & " " & p.escribe() & ("ha resistido el ataque.")
       TextAreaInformacion.text &= finlinea()
     Endif
 

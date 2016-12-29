@@ -1,0 +1,41 @@
+' Gambas class file
+
+Public Sub Form_Show()
+
+  Me.x = 300
+  Me.y = 300
+  RadioButtonFacil_Click()
+
+End
+
+Public Sub RadioButtonFacil_Click()
+
+  MGlobales.VelocidadFlotaRepublica = 10
+  MGlobales.VelocidadFlotaImperial = 5
+  MGlobales.NavesInicialesJugador = 45
+
+End
+
+Public Sub RadioButtonMedio_Click()
+
+  MGlobales.VelocidadFlotaRepublica = 10
+  MGlobales.VelocidadFlotaImperial = 5
+  MGlobales.NavesInicialesJugador = 35
+
+End
+
+Public Sub RadioButtonDificil_Click()
+
+  MGlobales.VelocidadFlotaRepublica = 10
+  MGlobales.VelocidadFlotaImperial = 10
+  MGlobales.NavesInicialesJugador = 25
+
+End
+
+Public Sub ButtonJugar_Click()
+
+  Dim f As New FMain
+
+  f.ShowModal()
+
+End

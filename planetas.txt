@@ -1,12 +1,42 @@
-Bespin
 Arkania
 Ambria
+Aarfonar
+Abafar
+Abregado-rae
+Aduba 3
+Agamar
+Bespin
+Bakura
+Balmorra
+Bandomeer
+Barab I
+Baroonda
+Bastion
+Belsavis
+Belkadan
+Betrayal
+Brentaal
 Carida
 Coruscant
+Christopsis
+Chalacta
+Cerea
+Concord Dawn
 Dathomir
+Drongar
+Druckenwell
+Dubrillion
+Duro
+Duunir
+Dxun
 Faryggo
 Endor
 Eredenn
+Eriadu
+Esseles
+Etti IV
+Excarga
+Falleen
 Geonosis
 Hoth
 Khomm 
@@ -14,8 +44,26 @@ Léhon
 Malachor 5
 Muunilinst
 Ohma-D'un
+Ord Sedra
+Oshsoom
+Ossus
+Peragus
+Peragus II
+Phindar
+Phu
+Ploo
 Raxus Prime
 Ruusan
+Sembla
+Serenno
+Sernpidal
+Seylott
+Shili'
+Simpla-12
+Sluis Vanl
+Socorro
+Star-forge
+Stennes
 Sullust
 Telti
 Utapau

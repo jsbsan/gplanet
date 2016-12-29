@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,160,93)
+  MoveScaled(0,0,159,98)
   Font = Font["Nimbus Mono L"]
   Icon = Picture["cascoimperial.png"]
   Arrangement = Arrange.Vertical
@@ -13,6 +13,9 @@
   }
   { TextAreaInformacion TextArea
     MoveScaled(7,81,77,12)
+    Font = Font["Bold,+2"]
+    Background = &H000000&
+    Foreground = &HFFFFFF&
     ReadOnly = True
     Wrap = True
   }
@@ -26,6 +29,6 @@
   }
   { TimerFlotasEnemigas #Timer
     #MoveScaled(89,51)
-    Delay = 15000
+    Delay = 25000
   }
 }

@@ -19,7 +19,8 @@ Private hdestino As Planeta
 
 Public naves As Integer  'numero de naves que la forman
 
-Public velocidad As Integer = 10 'Velocidad de la flota
+Property velocidad As Integer 'velocidad de la flota
+Private hvelocidad As Integer = MGlobales.VelocidadFlotaRepublica 'inicialmente, en la IA se redefine la velocidad
 
 Private hdistancia As Single
 Private hincrementoX As Single
@@ -28,7 +29,7 @@ Private hincrementoY As Single
 Private posX As Integer
 Private posY As Integer
 
-Private paso As Integer 'numero de pasos para llegar al planeta segun mi velocidad
+Private paso As Single 'numero de pasos para llegar al planeta segun mi velocidad
 Private hcontador As Integer = 0 'numero de pasos actualmente
 
 Private Function origen_Read() As Planeta
@@ -51,7 +52,7 @@ End
 
 Private Sub destino_Write(Value As Planeta)
 
-  Dim incre As Integer
+  Dim incre As Single
 
   hdestino = value
   'calculo distancia...
@@ -81,7 +82,12 @@ Public Sub dibuja()
     Paint.Dash = [3.0, 1.0]
     Paint.DashOffset = -5
 
-    Paint.Brush = Paint.Color(Color.red)
+    If Me.Propietario = "N/A" Then
+      Paint.Brush = Paint.Color(Color.Black)
+    Else
+      Paint.Brush = Paint.Color(Color.red)
+    Endif
+
     Paint.MoveTo(horigen.Posicion.x + horigen.radio, horigen.Posicion.y + horigen.radio)
     Paint.LineTo(hdestino.Posicion.x + hdestino.radio, hdestino.Posicion.y + hdestino.radio)
     Paint.stroke
@@ -132,5 +138,25 @@ End
 Private Sub Propietario_Write(Value As String)
 
   hpropietario = value
+
+End
+
+Private Function velocidad_Read() As Integer
+
+  Return hvelocidad
+
+End
+
+Private Sub velocidad_Write(Value As Integer)
+
+  hvelocidad = value
+  'recalculo del incremento
+
+  If hdistancia <> 0 Then
+
+    paso = hdistancia / Me.velocidad
+    hincrementoX = (hdestino.Posicion.x - horigen.Posicion.X) / (hdistancia / Me.velocidad)
+    hincrementoY = (hdestino.Posicion.y - horigen.Posicion.y) / (hdistancia / Me.velocidad)
+  Endif
 
 End

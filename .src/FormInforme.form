@@ -41,7 +41,7 @@
     MoveScaled(5,50,72,11)
     Font = Font["+5"]
     Alignment = Align.Center
-    Border = Border.Raised
+    Border = Border.Plain
   }
   { LabelPlanetasRepublica Label
     MoveScaled(19,22,11,8)

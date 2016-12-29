@@ -1,34 +1,45 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,46,24)
+  MoveScaled(0,0,47,24)
   Text = ("Creador de Flota")
   Icon = Picture["new republic.png"]
   { SpinBoxNaves SpinBox
-    MoveScaled(1,7,11,4)
+    MoveScaled(1,8,11,4)
   }
   { Label1 Label
     MoveScaled(1,1,12,5)
     Text = ("Nº de naves:")
   }
   { ButtonEnviarTodas Button
-    MoveScaled(1,18,29,4)
+    MoveScaled(1,19,29,4)
     Text = ("Enviar todas")
   }
   { ButtonMitad Button
-    MoveScaled(1,13,29,4)
+    MoveScaled(1,14,29,4)
     Text = ("Enviar la mitad")
   }
   { ButtonEnvioNumero Button
-    MoveScaled(13,7,17,4)
+    MoveScaled(13,8,17,4)
     Text = ("Enviar")
   }
   { ButtonCancelar Button
-    MoveScaled(35,18,10,4)
+    MoveScaled(34,19,10,4)
     Text = ("Cancelar")
   }
   { PictureBox1 PictureBox
-    MoveScaled(31,0,14,14)
+    MoveScaled(32,0,14,14)
     Picture = Picture["new republic.png"]
+    Border = Border.Plain
+  }
+  { LabelNavesDisponibles Label
+    MoveScaled(15,1,9,5)
+    Alignment = Align.Center
+  }
+  { LabelPlaneta Label
+    MoveScaled(32,14,14,4)
+    Font = Font["Bold"]
+    Alignment = Align.Center
+    Border = Border.Plain
   }
 }

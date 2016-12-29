@@ -1,9 +1,20 @@
 ' Gambas class file
 
+Public xx As Integer
+Public yy As Integer
+
 Public numero As Integer[]
 Public valormaximo As Integer
 
+Public NavesDisponibles As Integer
+Public nombrePlaneta As String
+
 Public Sub form_Show()
+
+  Me.x = xx - Me.w / 2
+  Me.y = yy - Me.h / 2
+  LabelNavesDisponibles.text = Str$(NavesDisponibles)
+  LabelPlaneta.text = nombrePlaneta
 
   SpinBoxNaves.MinValue = 1
   SpinBoxNaves.MaxValue = valormaximo

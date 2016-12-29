@@ -34,7 +34,7 @@ Public Function creaflota(ArrayP As Planeta[]) As Flota[] 'Agreva varias flotas 
   Dim planetaElegido As Planeta 'planeta del imperio
   Dim planetaEnemigo As Planeta 'planeta de los de la republica
 
-  Debug "Creando flota imperial"
+  ' Debug "Creando flota imperial"
 
   'creo dos flotas que saldran del planeta con más numero de naves
   For a = 0 To 1
@@ -98,6 +98,8 @@ Public Function creaflota(ArrayP As Planeta[]) As Flota[] 'Agreva varias flotas 
     planetaElegido.naves -= FlotaImperial.naves 'quito las naves del planeta
     FlotaImperial.activa = True
     FlotaImperial.Propietario = "N/A"
+    FlotaImperial.velocidad = MGlobales.VelocidadFlotaImperial
+
     ArrayFlotaImperial.Add(FlotaImperial)
   Next
 

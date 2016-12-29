@@ -1,7 +1,7 @@
 # Gambas Project File 3.0
 # Compiled with Gambas 3.9.1
 Title=gplanet
-Startup=FMain
+Startup=FormConfigurarJuego
 Icon=cascoimperial.png
 Version=0.0.1
 Component=gb.image
@@ -13,4 +13,13 @@ Authors="Julio Sanchez Berro (jsbsan)"
 TabSize=2
 Translate=1
 Language=en_US
+Maintainer=jsbsan
+Address=jusabejusabe@gmail.com
+Url=http://jsbsan.blogspot.com.es/
+License=General Public License
+PackageName=gplanet-0.0.1
+CreateEachDirectory=1
 Packager=1
+Systems=debian
+Menus=debian:"Games/Strategy"
+Groups=debian:"admin"
