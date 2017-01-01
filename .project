@@ -22,5 +22,5 @@ CreateEachDirectory=1
 Packager=1
 Systems=debian
 Menus=debian:"Games/Strategy"
-Categories=debian:"Games"
-Groups=debian:"games"
+Categories=debian:"BoardGame;Games"
+Groups=debian:"admin"
