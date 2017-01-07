@@ -19,8 +19,8 @@
     ReadOnly = True
     Wrap = True
   }
-  { Timer1 #Timer
-    #MoveScaled(62,51)
+  { TimerActualizarPosiciones #Timer
+    #MoveScaled(61,51)
     Delay = 500
   }
   { TimerProduccion #Timer

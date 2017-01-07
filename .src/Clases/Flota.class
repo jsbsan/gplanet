@@ -2,14 +2,12 @@
 
 Event llegada(p As Planeta, f As Flota)
 
-Public IconoNave As Image = Image.Load("naves/republica/XWing-icon.png")
-Public IconoNaveFlota As Image = Image.Load("naves/republica/XWing-icon-flota.png")
-Public IconoNaveFlotaGrande As Image = Image.Load("naves/republica/corveta.png")
+Public IconoNave As Image = Image.Load("naves/republica/XWing-icon.png") 'iconos iniciales de la flota
+Public IconoNaveFlota As Image = Image.Load("naves/republica/XWing-icon-flota.png") 'iconos iniciales de la flota
+Public IconoNaveFlotaGrande As Image = Image.Load("naves/republica/corveta.png") 'iconos iniciales de la flota
 
-Property Propietario As String
+Property Propietario As String 'a quien pertenece la flota
 Private hpropietario As String
-
-Public colorJugador As Integer
 
 Property origen As Planeta
 Private horigen As Planeta
@@ -22,6 +20,9 @@ Public naves As Integer  'numero de naves que la forman
 Property velocidad As Integer 'velocidad de la flota
 Private hvelocidad As Integer = MGlobales.VelocidadFlotaRepublica 'inicialmente, en la IA se redefine la velocidad
 
+Public activa As Boolean = False '' variable Bandera que indica cuando se puede dibujar (si tiene definido el planeta destino, si se dibuja, si solo tiene definido el planeta origen no se dibuja)
+
+'datos de la ruta donde tiene que ir la flota
 Private hdistancia As Single
 Private hincrementoX As Single
 Private hincrementoY As Single
@@ -56,7 +57,7 @@ Private Sub destino_Write(Value As Planeta)
 
   hdestino = value
   'calculo distancia...
-  hdistancia = EcuacionesRecta.distanciaEntreDosPuntos(horigen.Posicion.x + horigen.radio, horigen.Posicion.y + horigen.radio, hdestino.Posicion.x + hdestino.radio, hdestino.Posicion.y + hdestino.radio)
+  hdistancia = EcuacionesRecta.distanciaEntreDosPuntos(horigen.Posicion.x, horigen.Posicion.y, hdestino.Posicion.x, hdestino.Posicion.y)
   'calculo incremento
   incre = hdistancia / Me.velocidad
   hincrementoX = (hdestino.Posicion.x - horigen.Posicion.X) / incre
@@ -69,27 +70,25 @@ Private Sub destino_Write(Value As Planeta)
 
 End
 
-Public activa As Boolean = False
-
 Public Sub dibuja()
 
   If activa = True Then
-    ' Print "dibujando flota", Me
+    ' Si esta activa (definido origen y destino), se puede dibujar la flota
     'dibuja trazado ruta
 
     Paint.LineWidth = 1
     Paint.LineCap = Paint.LineCapButt
-    Paint.Dash = [3.0, 1.0]
+    Paint.Dash = [3.0, 1.0]  'dibuja una linea punteada
     Paint.DashOffset = -5
 
     If Me.Propietario = "N/A" Then
-      Paint.Brush = Paint.Color(Color.Black)
+      Paint.Brush = Paint.Color(Color.Black) 'color de la linea
     Else
       Paint.Brush = Paint.Color(Color.red)
     Endif
 
-    Paint.MoveTo(horigen.Posicion.x + horigen.radio, horigen.Posicion.y + horigen.radio)
-    Paint.LineTo(hdestino.Posicion.x + hdestino.radio, hdestino.Posicion.y + hdestino.radio)
+    Paint.MoveTo(horigen.Posicion.x + 25, horigen.Posicion.y + 25)
+    Paint.LineTo(hdestino.Posicion.x + 25, hdestino.Posicion.y + 25)
     Paint.stroke
 
     '  Print "dibujo icono de flota..."
@@ -103,7 +102,7 @@ Public Sub dibuja()
     End Select
     Paint.Stroke
 
-    'dibujo datos de la flota
+    'dibujo datos de la flota: numero de naves que forma la flota
     Paint.Font.Name = "Nimbus Mono L"
     Paint.Font.Size = 10
     Paint.Font.Bold = False
@@ -129,6 +128,20 @@ Public Sub avance()
 
 End
 
+Private Sub velocidad_Write(Value As Integer)
+
+  hvelocidad = value
+  'recalculo del incremento
+
+  If hdistancia <> 0 Then
+
+    paso = hdistancia / Me.velocidad
+    hincrementoX = (hdestino.Posicion.x - horigen.Posicion.X) / (hdistancia / Me.velocidad)
+    hincrementoY = (hdestino.Posicion.y - horigen.Posicion.y) / (hdistancia / Me.velocidad)
+  Endif
+
+End
+
 Private Function Propietario_Read() As String
 
   Return hpropietario
@@ -144,19 +157,5 @@ End
 Private Function velocidad_Read() As Integer
 
   Return hvelocidad
-
-End
-
-Private Sub velocidad_Write(Value As Integer)
-
-  hvelocidad = value
-  'recalculo del incremento
-
-  If hdistancia <> 0 Then
-
-    paso = hdistancia / Me.velocidad
-    hincrementoX = (hdestino.Posicion.x - horigen.Posicion.X) / (hdistancia / Me.velocidad)
-    hincrementoY = (hdestino.Posicion.y - horigen.Posicion.y) / (hdistancia / Me.velocidad)
-  Endif
 
 End

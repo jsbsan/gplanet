@@ -1,26 +1,20 @@
 ' Gambas class file
 
-Property colorplaneta As Integer
-Private hcolorplaneta As Integer
-
 Property Propietario As String 'de quien es el planteta Jugador IA o N/A (sin propietario)
+Private hPropietario As String = "N/A" 'inicialmente el propietario es el imperio
+
 Property Produccion As Integer ' produccion de naves: 5 a 15
 Private hProduccion As Integer
 
 Property Posicion As Point 'tiene las coordenadas del planeta
-
 Private hposicion As New Point
 
-Private hPropietario As String = "N/A"
-
-Public radio As Integer = 12
-
-Public naves As Integer
+Public naves As Integer 'naves que tiene el planeta
 
 Public nombre As String 'nombre del planeta
 
 Private imagenplaneta As String 'ruta del fichero de la imagen del planeta
-Private ImageImagenPlaneta As Image
+Private ImageImagenPlaneta As Image 'imagen del planeta
 
 Private Function Propietario_Read() As String
 
@@ -71,7 +65,6 @@ Public Sub _new(propiedad As String, tablerotmp As Tablero)
 
   hPosicion.y = p.y * 25
 
-  Me.colorplaneta = Choose(Int(Rnd(1, 6)), Color.orange, Color.Green, Color.red, Color.Magenta, Color.DarkCyan)
   imagenplaneta = Choose(Int(Rnd(1, 6)), "1r.png", "2r.png", "3r.png", "5r.png", "6r.png")
   ImageImagenPlaneta = Image.Load("planetas/" & imagenplaneta)
 
@@ -84,15 +77,6 @@ Public Function distancia(x As Integer, y As Integer) As Integer
 End
 
 Public Sub dibuja()
-  '
-  ' 'dibujo planeta
-  ' Paint.Brush = Paint.Color(Color.RGB(0, 0, 0))
-  ' Paint.Ellipse(Me.Posicion.x, Me.Posicion.y, radio * 2, radio * 2)
-  ' Paint.Stroke
-  ' Paint.Brush = Paint.Color(Me.colorplaneta)
-  ' Paint.Ellipse(Me.Posicion.x, Me.Posicion.y, radio * 2, radio * 2)
-  ' Paint.Fill(True)
-  ' Paint.Stroke
 
   'dibujo planeta
 
@@ -117,19 +101,7 @@ Public Sub dibuja()
 
 End
 
-Private Function colorplaneta_Read() As Integer
-
-  Return hcolorplaneta
-
-End
-
-Private Sub colorplaneta_Write(Value As Integer)
-
-  hcolorplaneta = value
-
-End
-
-Public Function igual(p As Planeta) As Boolean
+Public Function igual(p As Planeta) As Boolean 'Sirve para saber si la posicion del plantea que nos pasan es la misma que la nuestra.
 
   If p.Posicion.x = Me.Posicion.x And p.Posicion.y = Me.Posicion.y Then
     Return True
@@ -139,8 +111,7 @@ Public Function igual(p As Planeta) As Boolean
 
 End
 
-Public Function escribe() As String
-  'describe el nombre del planeta y la posicion en el tablero
+Public Function escribe() As String  'describe el nombre del planeta y la posicion en el tablero
 
   Dim cadena As String
 

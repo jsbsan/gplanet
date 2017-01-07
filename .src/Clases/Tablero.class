@@ -1,8 +1,22 @@
 ' Gambas class file
 
-Public celda As New Integer[40, 24]
+Public listaNombrePlanetas As String[]
+Public ArrayPlanetas As New Planeta[]
 
-Public Function casillalibre() As Point
+Public ArrayFlotas As New Flota[]
+
+Public celda As New Integer[40, 24] 'cuadricula donde se colocaran los planetas
+
+Private fondotmp As New Fondo
+
+Public Sub _new()
+  'carga nombre de lista de planetas
+
+  listaNombrePlanetas = Split(File.Load("planetas.txt"), "\n")
+
+End
+
+Public Function casillalibre() As Point 'devuelve una coordenada X, Y donde no exista ningun planeta.
 
   Dim x, y As Integer
   Dim casilla As New Point
@@ -21,7 +35,7 @@ Public Function casillalibre() As Point
 
 End
 
-Private Function alrededor(vx As Integer, vy As Integer) As Boolean
+Private Function alrededor(vx As Integer, vy As Integer) As Boolean 'Comprueba que alrededor de la coordenada que nos pasan, no hay planetas. Asi evitamos que esten muy juntos los planetas.
 
   Dim a As Integer
 
@@ -34,5 +48,136 @@ Private Function alrededor(vx As Integer, vy As Integer) As Boolean
   If celda[vx + 1, vy] <> 0 Then Return False
   If celda[vx + 2, vy] <> 0 Then Return False
   Return True
+
+End
+
+Public Sub crearPlanestas()
+
+  Dim a As Integer
+  Dim p As Planeta
+
+  Dim n As String
+
+  For a = 1 To 10 'creo 10 planetas
+    p = New Planeta("N/A", Me) 'asigno nuevo planeta al imperio
+
+    n = listaNombrePlanetas.Extract(Int(Rnd(1, listaNombrePlanetas.Count)))[0] 'extraigo aleatoriamente un nombre de la lista de planetas
+    p.nombre = n 'asigno nombre
+    p.naves = Int(Rnd(1, 6)) 'asigno numero de naves
+    ArrayPlanetas.Add(p) 'lo añado al Array de Plantetas.
+  Next
+
+End
+
+Public Sub creoPlanetaJugador()
+
+  Dim p As Planeta
+
+  p = New Planeta("Jugador 1", Me)
+  P.naves = MGlobales.NavesInicialesJugador
+  p.nombre = listaNombrePlanetas[0]
+  ArrayPlanetas.Add(p)
+
+End
+
+Public Function planetaCercano(x As Integer, y As Integer) As Planeta 'devuelve el planeta más cercado dada unas coordenadas
+
+  Dim ptmp As Planeta
+  Dim distanciaMinima As Integer = 1000000
+  Dim disttmp As Integer
+  Dim pCercano As Planeta
+
+  For Each ptmp In ArrayPlanetas
+    disttmp = ptmp.distancia(x, y)
+    If distanciaMinima > ptmp.distancia(x, y) Then
+      distanciaMinima = disttmp
+      pCercano = ptmp
+    Endif
+  Next
+
+  Return pCercano
+
+End
+
+Public Sub ActualizarPosicionFlotas()
+
+  Dim flotatmp As Flota
+  'hace que avancen las flotas
+  For Each flotatmp In Me.ArrayFlotas
+    flotatmp.avance()
+  Next
+
+End
+
+Public Sub ActualizarProduccionPlanetas()
+
+  Dim ptmp As Planeta
+  'hace que todos los planetas fabriquen naves!!!
+  For Each ptmp In ArrayPlanetas
+    ptmp.naves += ptmp.Produccion
+  Next
+
+End
+
+Public Sub DibujaTablero()
+
+  Dim flotatmp As Flota
+  Dim planetTmp As Planeta
+
+  'dibujo fondo
+  fondotmp.dibujo()
+  'dibujo naves navegando
+  For Each flotatmp In ArrayFlotas
+    flotatmp.dibuja()
+  Next
+
+  'dibujo planetas y datos
+  For Each planetTmp In ArrayPlanetas
+    planetTmp.dibuja()
+  Next
+
+End
+
+'Condiciones del final de juego...
+Public Sub InformeFinalJuego()
+
+  Dim planetaTmp As Planeta
+  Dim flotatmp As Flota
+
+  Dim ContadorImperialPlanetas As Integer
+  Dim ContadorImperialNavesEnPlanetas As Integer
+  Dim ContadorImperialNavesEnFlotas As Integer
+
+  Dim ContadorJugadorPlanetas As Integer
+  Dim ContadorJugadorNavesEnPlanetas As Integer
+  Dim ContadorJugadorNavesEnFlotas As Integer
+
+  For Each planetaTmp In ArrayPlanetas
+    If planetaTmp.Propietario = "N/A" Then
+      ContadorImperialPlanetas += 1
+      ContadorImperialNavesEnPlanetas += planetaTmp.naves
+    Else
+      ContadorJugadorPlanetas += 1
+      ContadorJugadorNavesEnPlanetas += planetaTmp.naves
+    Endif
+  Next
+
+  For Each flotatmp In ArrayFlotas
+    If flotatmp.Propietario = "N/A" Then
+
+      ContadorImperialNavesEnFlotas += flotatmp.naves
+    Else
+
+      ContadorJugadorNavesEnFlotas += flotatmp.naves
+    Endif
+
+  Next
+
+  FormInforme.RebeldesNaves = ContadorJugadorNavesEnFlotas + ContadorJugadorNavesEnPlanetas
+  FormInforme.RebeldesPlanetas = ContadorJugadorPlanetas
+  FormInforme.ImperioNaves = ContadorImperialNavesEnFlotas + ContadorImperialNavesEnPlanetas
+  FormInforme.ImperioPlanetas = ContadorImperialPlanetas
+
+  FormInforme.Showmodal()
 
 End

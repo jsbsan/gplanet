@@ -1,7 +1,5 @@
 ' Gambas class file
 
-' Gambas class file
-
 Public ImagenFondo As New Image
 
 Public Sub _new()
