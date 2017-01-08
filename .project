@@ -3,7 +3,7 @@
 Title=gplanet
 Startup=FormConfigurarJuego
 Icon=cascoimperial.png
-Version=0.0.1
+Version=0.0.2
 Component=gb.image
 Component=gb.gui
 Component=gb.form
@@ -17,7 +17,7 @@ Maintainer=jsbsan
 Address=jusabejusabe@gmail.com
 Url=http://jsbsan.blogspot.com.es/
 License=General Public License
-PackageName=gplanet-0.0.1
+PackageName=gplanet-0.0.2
 CreateEachDirectory=1
 Packager=1
 Systems=debian

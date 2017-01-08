@@ -4,6 +4,7 @@
   MoveScaled(0,0,83,64)
   Text = ("Informe de la Partida")
   Icon = Picture["cascoimperial.png"]
+  Resizable = False
   { PictureBox1 PictureBox
     MoveScaled(19,6,14,15)
     Picture = Picture["new republic.png"]

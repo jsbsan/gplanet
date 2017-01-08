@@ -1,5 +1,7 @@
 ' Gambas class file
 
+Event NuevoMensaje(texto As String) 'evento que manda el tablero, con el mensaje que queremos que se muestre en el formulario
+
 Public listaNombrePlanetas As String[]
 Public ArrayPlanetas As New Planeta[]
 
@@ -8,6 +10,8 @@ Public ArrayFlotas As New Flota[]
 Public celda As New Integer[40, 24] 'cuadricula donde se colocaran los planetas
 
 Private fondotmp As New Fondo
+
+Private ObservadorDeFlotas As Observer 'observa las flotas
 
 Public Sub _new()
   'carga nombre de lista de planetas
@@ -179,5 +183,71 @@ Public Sub InformeFinalJuego()
   FormInforme.ImperioPlanetas = ContadorImperialPlanetas
 
   FormInforme.Showmodal()
+
+End
+'-----------------------------
+'observar las flotas
+'-----------------------------
+
+Public Sub ObservarArrayFlota(ArrayFlota As Flota[])
+
+  Dim flotatmp As Flota
+
+  For Each flotatmp In ArrayFlota
+    ObservarFlota(flotatmp)
+  Next
+
+End
+
+Public Sub ObservarFlota(flotatmp As Flota)
+
+  ObservadorDeFlotas = New Observer(flotatmp) As "ObservadorDeFlotas" 'las observo para cuando lleguen a un planeta ver su evento "llegada"
+
+End
+
+Public Sub ObservadorDeFlotas_llegada(p As Planeta, f As Flota)
+
+  If p.Propietario = f.Propietario Then
+    'las flotas se suman
+    p.naves += f.naves
+
+    '-----------------------------------------------
+    'texto para identificar flota
+    If f.Propietario = "N/A" Then
+      Raise NuevoMensaje(("El imperio reune sus fuerzas.."))
+    Endif
+    '-----------------------------------------------
+
+    Raise NuevoMensaje(("Llegada de la flota al planeta") & " " & p.escribe() & ("... reuniendo naves para el próximo ataque"))
+
+  Else
+    'es un planeta enemigo:
+    p.naves -= f.naves
+
+    '-----------------------------------------------
+    'texto para identificar flota
+    If f.Propietario = "N/A" Then
+      Raise NuevoMensaje(("Imperio: "))
+    Else
+      Raise NuevoMensaje(("Alianza Rebelde: "))
+    Endif
+    '-----------------------------------------------
+
+    If p.naves < 0 Then
+      'cambia de dueño el planeta
+      p.naves = Abs(p.naves)
+      p.Propietario = f.Propietario
+      Raise NuevoMensaje(("Victoria!!!!.. planeta") & " " & p.escribe() & ("conquistado."))
+
+    Else
+      Raise NuevoMensaje(("Derrota!!!!.. el planeta") & " " & p.escribe() & ("ha resistido el ataque."))
+
+    Endif
+
+  Endif
+
+  'borro la flota del array
+  ArrayFlotas.Delete(ArrayFlotas.Find(f))
+  f = Null
 
 End

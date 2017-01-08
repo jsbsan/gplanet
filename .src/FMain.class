@@ -30,23 +30,17 @@ Public Sub Form_Open()
   TimerProduccion.Start()
   TimerFlotasEnemigas.Start()
 
-End
-
-Private Function finlinea() As String
-
-  TextAreaInformacion.Pos = TextAreaInformacion.Length
-  Return "\n"
+  'observo el tablero
+  Object.Attach(tablerojuego, Me, "obs")
 
 End
 
 Public Sub DrawingArea1_MouseDown()
+  'hago click -> realmente es bajar el boton del ratón
 
   Dim p As Planeta
-  'hago clip....
 
   p = tablerojuego.planetaCercano(Mouse.x, Mouse.y)
-
-  '  Print p.Produccion, p.Propietario
 
   If p.Propietario = JugadorUno Then
     seleccion(p)
@@ -111,7 +105,9 @@ Public Sub seleccion(p As Planeta)
 
     flotaActual = New Flota
     flotaActual.Propietario = JugadorUno
-    Object.Attach(flotaActual, Me, "obs") 'porque lo estamos usando dentro de un formulario
+
+    'voy a hacer que el tablero observe la flota del jugador
+    tablerojuego.ObservarFlota(flotaActual)
 
     flotaActual.origen = p
     flotaActual.naves = res
@@ -149,52 +145,16 @@ Public Sub TimerActualizarPosiciones_Timer()
 
 End
 
-Public Sub obs_llegada(p As Planeta, f As Flota)
+Private Function finlinea() As String
 
-  If p.Propietario = f.Propietario Then
-    'las flotas se suman
-    p.naves += f.naves
+  TextAreaInformacion.Pos = TextAreaInformacion.Length
+  Return "\n"
 
-    '-----------------------------------------------
-    'texto para identificar flota
-    If f.Propietario = "N/A" Then
-      TextAreaInformacion.text &= ("El imperio reune sus fuerzas..")
-    Endif
-    '-----------------------------------------------
+End
 
-    TextAreaInformacion.text &= ("Llegada de la flota al planeta") & " " & p.escribe() & ("... reuniendo naves para el próximo ataque")
-    TextAreaInformacion.text &= finlinea()
+Public Sub obs_NuevoMensaje(t As String)
 
-  Else
-    'es un planeta enemigo:
-    p.naves -= f.naves
-
-    '-----------------------------------------------
-    'texto para identificar flota
-    If f.Propietario = "N/A" Then
-      TextAreaInformacion.text &= ("Imperio: ")
-    Else
-      TextAreaInformacion.text &= ("Alianza Rebelde: ")
-    Endif
-    '-----------------------------------------------
-
-    If p.naves < 0 Then
-      'cambia de dueño el planeta
-      p.naves = Abs(p.naves)
-      p.Propietario = f.Propietario
-      TextAreaInformacion.text &= ("Victoria!!!!.. planeta") & " " & p.escribe() & ("conquistado.")
-      TextAreaInformacion.text &= finlinea()
-
-    Else
-      TextAreaInformacion.text &= ("Derrota!!!!.. el planeta") & " " & p.escribe() & ("ha resistido el ataque.")
-      TextAreaInformacion.text &= finlinea()
-    Endif
-
-  Endif
-
-  'borro la flota del array
-  tablerojuego.ArrayFlotas.Delete(tablerojuego.ArrayFlotas.Find(f))
-  f = Null
+  TextAreaInformacion.text &= t & finlinea()
 
 End
 
@@ -234,9 +194,11 @@ Public Sub TimerFlotasEnemigas_Timer()
     Return
   Endif
 
-  For Each flotatmp In flotaImperialTmp
-    Object.Attach(flotatmp, Me, "obs") ' las observo, para cuando lleguen a un planeta ver su evento.
-  Next
+  tablerojuego.ObservarArrayFlota(flotaImperialTmp)
+
+  ' For Each flotatmp In flotaImperialTmp
+  '   Object.Attach(flotatmp, Me, "obs") ' las observo, para cuando lleguen a un planeta ver su evento.
+  ' Next
 
   tablerojuego.ArrayFlotas.insert(flotaImperialTmp) 'las añado al tablero
 

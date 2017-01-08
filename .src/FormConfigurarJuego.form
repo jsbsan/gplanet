@@ -5,6 +5,7 @@
   Background = &HFFFFFF&
   Text = ("GPlanet")
   Icon = Picture["cascoimperial.png"]
+  Resizable = False
   { PictureBox1 PictureBox
     MoveScaled(2,44,14,17)
     Picture = Picture["galactic empire.png"]
