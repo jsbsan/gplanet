@@ -1,0 +1,19 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tradukisto 0.0.13\n"
+"POT-Creation-Date: 2017-01-10 20:52+CET\n"
+"PO-Revision-Date: 2017-01-10 21:04+CET\n"
+"Last-Translator:  \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#: .project:1
+msgid "gplanet"
+msgstr "Gplanet"
+
+#: .project:2
+msgid "Extends the power of the new republic by the weakened empire .... wins planets but while ... wait for the counterattack of the empire.\nExtiende el poder de la nueva república por el debilitado imperio.... gana planetas pero mientas...... esperas al contrataque del imperio."
+msgstr "Ncua lub hwj chim ntawm tus tshiab koom pheej los ntawm cov tsis muaj zog txaus lub teb chaws.... yeej thaum ntiaj teb tab sis... tos rau lub counterattack ntawm lub teb chaws ottoman. \ nextiende lub hwj chim ntawm tus tshiab koom pheej los ntawm cov tsis muaj zog txaus lub teb chaws yeej planets tab sis pw.... ...... tos kom counterattack lub teb chaws ottoman."
+

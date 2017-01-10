@@ -1,0 +1,173 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gplanet 3.9.2\n"
+"POT-Creation-Date: 2017-01-10 20:25 UTC\n"
+"PO-Revision-Date: 2017-01-10 20:21 UTC\n"
+"Last-Translator: mint <mint@mint-OptiPlex-740>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .project:1
+msgid "gplanet"
+msgstr "Gplanet"
+
+#: .project:2
+msgid ""
+"Extends the power of the new republic by the weakened empire .... wins planets but while ... wait for the counterattack of the empire.\n"
+"Extiende el poder de la nueva república por el debilitado imperio.... gana planetas pero mientas...... esperas al contrataque del imperio."
+msgstr "Extends the power of the new republic by the weakened empire .... wins planets but while ... wait for the counterattack of the empire. ...... wait for the counterattack of the empire."
+
+#: FMain.class:18
+msgid "Construye tu Imperio Galáctico..."
+msgstr "Build your Galactic Empire ..."
+
+#: FMain.class:18
+msgid "Tu misión: Explora y domina el mayor número de planetas..."
+msgstr "Your mission: Explore and master the largest number of planets ..."
+
+#: FMain.class:56
+msgid "Flota enviada a la conquista del planeta enemigo..."
+msgstr "Fleet sent to conquer the enemy planet ..."
+
+#: FMain.class:62
+msgid "Nombre:"
+msgstr "Name:"
+
+#: FMain.class:63
+msgid "Produccion:"
+msgstr "Production:"
+
+#: FMain.class:64
+msgid "Naves:"
+msgstr "Ships:"
+
+#: FMain.class:81
+msgid "No hay naves para enviar a ningún lado"
+msgstr "There are no ships to send anywhere"
+
+#: FMain.class:86
+msgid "No hay naves bastantes para enviar a ningún lado"
+msgstr "There are not enough ships to send anywhere"
+
+#: FMain.class:103
+msgid "Elija planeta de destino..."
+msgstr "Choose destination planet ..."
+
+#: FMain.class:133
+msgid "Flota enviada al planeta amigo"
+msgstr "Fleet sent to the planet friend"
+
+#: FMain.class:165
+msgid "Fin de turno de Producción"
+msgstr "End of production shift"
+
+#: FormConfigurarJuego.form:20
+msgid "GPlanet"
+msgstr "GPlanet"
+
+#: FormConfigurarJuego.form:43
+msgid ""
+"<b>La nueva república te necesita !!!</b>\n"
+"Conquista todos los planetas del sector asignado, lanza tus flotas a la conquista. Cada cierto tiempo, los planetas producen naves, aumenta tu flota con ellas porque..... el imperio responderá"
+msgstr ""
+"<b> The new republic needs you! </b> \n"
+"Conquer all the planets in the assigned sector, launch your fleets to the conquest. Every so often, the planets produce ships, increase your fleet with them because ..... the empire will respond"
+
+#: FormConfigurarJuego.form:54
+msgid "Fácil"
+msgstr "Easy"
+
+#: FormConfigurarJuego.form:60
+msgid "Jugar"
+msgstr "To play"
+
+#: FormConfigurarJuego.form:66
+msgid "Medio"
+msgstr "Medium"
+
+#: FormConfigurarJuego.form:71
+msgid "Difícil"
+msgstr "Difficult"
+
+#: FormConfigurarJuego.form:81
+msgid "Autor: Julio Sánchez Berro (jsbsan)      http://jsbsan.blogspot.com.es/ "
+msgstr "Author: Julio Sánchez Berro (jsbsan) http://jsbsan.blogspot.com.es/"
+
+#: FormCreandoFlota.form:16
+msgid "Creador de Flota"
+msgstr "Fleet Creator"
+
+#: FormCreandoFlota.form:25
+msgid "Nº de naves:"
+msgstr "Number of ships:"
+
+#: FormCreandoFlota.form:30
+msgid "Enviar todas"
+msgstr "Send all"
+
+#: FormCreandoFlota.form:35
+msgid "Enviar la mitad"
+msgstr "Send half"
+
+#: FormCreandoFlota.form:40
+msgid "Enviar"
+msgstr "Submit"
+
+#: FormCreandoFlota.form:45
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: FormInforme.class:23
+msgid "Victoria de los Rebeldes"
+msgstr "Victory of the Rebels"
+
+#: FormInforme.class:26
+msgid "Victoria del Imperio"
+msgstr "Victoria of the Empire"
+
+#: FormInforme.form:19
+msgid "Informe de la Partida"
+msgstr "Match Report"
+
+#: FormInforme.form:48
+msgid "vs"
+msgstr "Vs"
+
+#: Tablero.class:217
+msgid "El imperio reune sus fuerzas.."
+msgstr "The empire joins forces .."
+
+#: Tablero.class:221
+msgid "... reuniendo naves para el próximo ataque"
+msgstr "... gathering ships for the next attack"
+
+#: Tablero.class:221
+msgid "Llegada de la flota al planeta"
+msgstr "Arrival of the fleet to the planet"
+
+#: Tablero.class:230
+msgid "Imperio: "
+msgstr "Empire:"
+
+#: Tablero.class:232
+msgid "Alianza Rebelde: "
+msgstr "Rebel Alliance:"
+
+#: Tablero.class:240
+msgid "Victoria!!!!.. planeta"
+msgstr "Victoria !!!! ... planet"
+
+#: Tablero.class:240
+msgid "conquistado."
+msgstr "Conquered"
+
+#: Tablero.class:243
+msgid "Derrota!!!!.. el planeta"
+msgstr "Defeat the planet ..."
+
+#: Tablero.class:243
+msgid "ha resistido el ataque."
+msgstr "Has resisted the attack."

@@ -39,3 +39,7 @@ Public Sub ButtonJugar_Click()
   f.ShowModal()
 
 End
+
+Public Sub Form_Open()
+
+End

@@ -1,0 +1,175 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gplanet 3.9.2\n"
+"POT-Creation-Date: 2017-01-10 20:24 UTC\n"
+"PO-Revision-Date: 2017-01-10 20:21 UTC\n"
+"Last-Translator: mint <mint@mint-OptiPlex-740>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .project:1
+msgid "gplanet"
+msgstr "gplanet"
+
+#: .project:2
+msgid ""
+"Extends the power of the new republic by the weakened empire .... wins planets but while ... wait for the counterattack of the empire.\n"
+"Extiende el poder de la nueva república por el debilitado imperio.... gana planetas pero mientas...... esperas al contrataque del imperio."
+msgstr ""
+"Erweitert die Macht der neuen Republik durch die geschwächte Reich .... gewinnt, während Planeten aber ... für den Gegenangriff des Reiches warten. \n"
+"Extiende die Macht der neuen Republik durch die geschwächte Reich gewinnt Planeten aber liegen .... ...... warten, das Reich zu kontern."
+
+#: FMain.class:18
+msgid "Construye tu Imperio Galáctico..."
+msgstr "Bauen Sie Ihr Galaktische Imperium ..."
+
+#: FMain.class:18
+msgid "Tu misión: Explora y domina el mayor número de planetas..."
+msgstr "Ihre Mission: Entdecken und dominiert die größte Anzahl von Planeten ..."
+
+#: FMain.class:56
+msgid "Flota enviada a la conquista del planeta enemigo..."
+msgstr "Flotte geschickt, um den Feind Planeten zu erobern ..."
+
+#: FMain.class:62
+msgid "Nombre:"
+msgstr "Name:"
+
+#: FMain.class:63
+msgid "Produccion:"
+msgstr "Produktion:"
+
+#: FMain.class:64
+msgid "Naves:"
+msgstr "Schiffe:"
+
+#: FMain.class:81
+msgid "No hay naves para enviar a ningún lado"
+msgstr "Keine Schiffe überall zu senden"
+
+#: FMain.class:86
+msgid "No hay naves bastantes para enviar a ningún lado"
+msgstr "Keine Schiffe genug, um überall zu schicken"
+
+#: FMain.class:103
+msgid "Elija planeta de destino..."
+msgstr "Ziel auswählen Planeten ..."
+
+#: FMain.class:133
+msgid "Flota enviada al planeta amigo"
+msgstr "Flotte geschickt, um den Planeten Freund"
+
+#: FMain.class:165
+msgid "Fin de turno de Producción"
+msgstr "Schichtende Produktion"
+
+#: FormConfigurarJuego.form:20
+msgid "GPlanet"
+msgstr "GPlanet"
+
+#: FormConfigurarJuego.form:43
+msgid ""
+"<b>La nueva república te necesita !!!</b>\n"
+"Conquista todos los planetas del sector asignado, lanza tus flotas a la conquista. Cada cierto tiempo, los planetas producen naves, aumenta tu flota con ellas porque..... el imperio responderá"
+msgstr ""
+"<b> The New Republic braucht Sie !!! </b> \n"
+"Conquista alle Planeten in der zugewiesenen Sektor starten Sie Ihre Flotten zu erobern. Jeder so oft, die Planeten produzieren Schiffe, steigern Sie Ihre Flotte mit ihnen, weil die Regel reagieren ....."
+
+#: FormConfigurarJuego.form:54
+msgid "Fácil"
+msgstr "leicht"
+
+#: FormConfigurarJuego.form:60
+msgid "Jugar"
+msgstr "spielen"
+
+#: FormConfigurarJuego.form:66
+msgid "Medio"
+msgstr "Mittel"
+
+#: FormConfigurarJuego.form:71
+msgid "Difícil"
+msgstr "schwierig"
+
+#: FormConfigurarJuego.form:81
+msgid "Autor: Julio Sánchez Berro (jsbsan)      http://jsbsan.blogspot.com.es/ "
+msgstr "Autor: Julio Sanchez Berro (jsbsan) http://jsbsan.blogspot.com.es/"
+
+#: FormCreandoFlota.form:16
+msgid "Creador de Flota"
+msgstr "Creator-Flotte"
+
+#: FormCreandoFlota.form:25
+msgid "Nº de naves:"
+msgstr "Anzahl der Schiffe:"
+
+#: FormCreandoFlota.form:30
+msgid "Enviar todas"
+msgstr "senden Sie alle"
+
+#: FormCreandoFlota.form:35
+msgid "Enviar la mitad"
+msgstr "senden Hälfte"
+
+#: FormCreandoFlota.form:40
+msgid "Enviar"
+msgstr "senden"
+
+#: FormCreandoFlota.form:45
+msgid "Cancelar"
+msgstr "stornieren"
+
+#: FormInforme.class:23
+msgid "Victoria de los Rebeldes"
+msgstr "Rebel Sieg"
+
+#: FormInforme.class:26
+msgid "Victoria del Imperio"
+msgstr "Victoria Empire"
+
+#: FormInforme.form:19
+msgid "Informe de la Partida"
+msgstr "Bericht des Online-Spiel"
+
+#: FormInforme.form:48
+msgid "vs"
+msgstr "vs"
+
+#: Tablero.class:217
+msgid "El imperio reune sus fuerzas.."
+msgstr "Das Reich sammelt seine Kräfte .."
+
+#: Tablero.class:221
+msgid "... reuniendo naves para el próximo ataque"
+msgstr "... Das Sammeln von Schiffen für den nächsten Angriff"
+
+#: Tablero.class:221
+msgid "Llegada de la flota al planeta"
+msgstr "Ankunft der Flotte auf den Planeten"
+
+#: Tablero.class:230
+msgid "Imperio: "
+msgstr "Empire:"
+
+#: Tablero.class:232
+msgid "Alianza Rebelde: "
+msgstr "Rebellen-Allianz:"
+
+#: Tablero.class:240
+msgid "Victoria!!!!.. planeta"
+msgstr "Victoria Planeten !!!! .."
+
+#: Tablero.class:240
+msgid "conquistado."
+msgstr "Ich eroberte."
+
+#: Tablero.class:243
+msgid "Derrota!!!!.. el planeta"
+msgstr "Besiegt den Planeten !!!! .."
+
+#: Tablero.class:243
+msgid "ha resistido el ataque."
+msgstr "Er hat den Angriff widerstanden."
